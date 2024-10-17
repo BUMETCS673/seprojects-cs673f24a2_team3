@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+
+            <div class="el-col-xs-offset-16">
+                <h3>IMDB TOP 250 Movies
+{#                    <small>(2022-6-29)</small>#}
+                </h3>
+                <br><br><br>
+                <div class="align-left" style="width:1000px">
+                    {#                class ="container" 表格居中 bootstrap 样式 #}
+                    <table class="table table-condensed">
+                        <tr>
+                            <td align="center" valign="middle">Movie Name</td>
+                            <td align="center" valign="middle">Year</td>
+                            <td align="center" valign="middle">Rating</td>
+                            <td align="center" valign="middle">Language</td>
+                            <td align="center" valign="middle">Type</td>
+                            <td align="center" valign="middle">Runtime</td>
+                            <td align="center" valign="middle">Production Company</td>
+                            <td align="center" valign="middle">Country</td>
+                            <td align="center" valign="middle">Gross worldwide</td>
+                            <td align="center" valign="middle">Awards</td>
+                        </tr>
+                        {% for da in res %}
+                            <tr>
+
+                                <td align="center" valign="left"><a href="{{ da.4 }}">{{ da.1 }}</a></td>
+                                <td align="center" valign="left">{{ da.2 }}</td>
+                                <td align="center" valign="left">{{ da.3 }}</td>
+                                <td align="center" valign="">{{ da.5 }}</td>
+                                <td align="center" valign="left">{{ da.6 }}</td>
+                                <td align="center" valign="left">{{ da.7 }}</td>
+                                <td align="center" valign="left">{{ da.8 }}</td>
+                                <td align="center" valign="left">{{ da.9 }}</td>
+                                <td align="center" valign="left">{{ da.10 }}</td>
+                                <td align="center" valign="left">{{ da.11 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

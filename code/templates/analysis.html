@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="container">
+            {#            <h4>This page mainly shows the basic information visualization of the top 250 movies.</h4>#}
+        </div>
+
+        <br><br><br>
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <div id="chart_1" style="width: 100%;height:500px;"></div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- /container -->
+    <div class="container">
+
+        {#        <h3>各省市累计死亡人数</h3>#}
+        {#        <p>分值为唯一值，可以看到整体网站电影评分的分布</p>#}
+        <br><br><br>
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <div id="chart_2" style="width: 100%;height:400px;"></div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- /container -->
+    <div class="container">
+
+        <br><br><br>
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <div id="chart_3" style="width: 100%;height:400px;"></div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- /container -->
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <div id="chart_4" style="width:100%; height:800px"></div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- /container -->
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+
+            <div class="col-xs-12">
+
+                <div id="chart_5" style="width:100%; height:800px"></div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- /container -->
+
+    <script src="{% static 'js/echarts.min.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/echarts.js' %}"></script>
+    <script src="{% static 'js/china.js' %}" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        console.log(name);
+        var myChart1 = echarts.init(document.getElementById('chart_1'));
+        // 指定图表的配置项和数据
+        var option1 = {
+            title: {
+                text: 'The number of film intervals in the release year',
+                subtext: 'Fake Data',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: 'Access From',
+                    type: 'pie',
+                    radius: '50%',
+                    data: {{ list_joson1|safe }},
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart1.setOption(option1);
+
+        var myChart2 = echarts.init(document.getElementById('chart_2'));
+        // 指定图表的配置项和数据
+        var option2 = {
+            title: {
+                text: 'Number of languages',
+                left: 'center'
+            },
+            xAxis: {
+                type: 'category',
+                data: {{ x2|safe }},
+                axisLabel: {
+                    interval: 0, //坐标刻度之间的显示间隔，默认就可以了（默认是不重叠）
+                    rotate: 38   //调整数值改变倾斜的幅度（范围-90到90）
+                }
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: {{ y2|safe }},
+                    type: 'bar',
+                    showBackground: true,
+                    backgroundStyle: {
+                        color: 'rgba(180, 180, 180, 0.2)'
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+
+        var myChart3 = echarts.init(document.getElementById('chart_3'));
+        // 指定图表的配置项和数据
+        var option3 = {
+            title: {
+                text: 'Number of Movies type',
+                left: 'center'
+            },
+            xAxis: {
+                type: 'category',
+                data: {{ x3|safe }},
+                axisLabel: {
+                    interval: 0, //坐标刻度之间的显示间隔，默认就可以了（默认是不重叠）
+                    rotate: 38   //调整数值改变倾斜的幅度（范围-90到90）
+                }
+
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: {{ y3|safe }},
+                    type: 'line',
+                    smooth: true
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option3);
+
+        var myChart4 = echarts.init(document.getElementById('chart_4'));
+        // 指定图表的配置项和数据
+        var option4 = {
+            title: {
+                text: 'Movie duration interval frequency',
+                left: 'center'
+            },
+            xAxis: {
+                type: 'category',
+                data: {{ x4|safe }},
+                axisLabel: {
+                    interval: 0, //坐标刻度之间的显示间隔，默认就可以了（默认是不重叠）
+                    rotate: 38   //调整数值改变倾斜的幅度（范围-90到90）
+                }
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    data: {{ y4|safe }},
+                    type: 'bar',
+                    showBackground: true,
+                    backgroundStyle: {
+                        color: 'rgba(180, 180, 180, 0.2)'
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart4.setOption(option4);
+
+        var myChart5 = echarts.init(document.getElementById('chart_5'));
+        // 指定图表的配置项和数据
+        var option5 = {
+            title: {
+                text: 'Number of production areas',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c}%'
+            },
+            legend: {
+                top: '30',
+                x: 'right',
+                data: {{ x5|safe }}
+            },
+            series: [
+                {
+                    name: 'Country',
+                    type: 'funnel',
+                    left: '10%',
+                    top: 90,
+                    bottom: 60,
+                    width: '80%',
+                    min: 0,
+                    max: 100,
+                    minSize: '0%',
+                    maxSize: '95%',
+                    sort: 'descending',
+                    gap: 2,
+                    label: {
+                        show: true,
+                        position: 'inside'
+                    },
+                    labelLine: {
+                        length: 10,
+                        lineStyle: {
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    itemStyle: {
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    emphasis: {
+                        label: {
+                            fontSize: 20
+                        }
+                    },
+                    data: {{ list_joson2|safe }}
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart5.setOption(option5);
+
+    </script>
+
+{% endblock %}
