@@ -1,4 +1,4 @@
-Django==3.2.12
+Django==4.2.16
 django-environ
 gunicorn
 whitenoise
