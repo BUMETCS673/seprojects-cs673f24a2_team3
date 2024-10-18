@@ -1,0 +1,577 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"> <!--begin::Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MDVP | Dashboard V3 </title><!--begin::Primary Meta Tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="MDVP | Dashboard v3">
+    <meta name="author" content="ColorlibHQ">
+    <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS.">
+    <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"><!--end::Primary Meta Tags--><!--begin::Fonts-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous"><!--end::Fonts--><!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="{% static 'analysis/css/adminlte.css' %}"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <!-- Include ECharts library -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style> 
+        .platform-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #d9695a;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
+    <div class="app-wrapper"> <!--begin::Header-->
+        <nav class="app-header navbar navbar-expand bg-body"> <!--begin::Container-->
+            <div class="container-fluid"> <!--begin::Start Navbar Links-->
+                <ul class="navbar-nav">
+                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="bi bi-list"></i> </a> </li>
+                    <li class="nav-item d-none d-md-block"> <a href="#" class="nav-link">Home</a> </li>
+                    <li class="nav-item d-none d-md-block"> <a href="#" class="nav-link">Contact</a> </li>
+                </ul> <!--end::Start Navbar Links--> <!--begin::End Navbar Links-->
+                <ul class="navbar-nav ms-auto"> <!--begin::Navbar Search-->
+                    <!--begin::Fullscreen Toggle-->
+                    <li class="nav-item"> <a class="nav-link" href="#" data-lte-toggle="fullscreen"> <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i> <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i> </a> </li> <!--end::Fullscreen Toggle-->
+                    <!--begin::Color code dropdown menu-->
+                    <li class="nav-item dropdown">
+                        <button
+                          class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+                          id="bd-theme"
+                          type="button"
+                          aria-expanded="false"
+                          data-bs-toggle="dropdown"
+                          data-bs-display="static"
+                        >
+                          <span class="theme-icon-active">
+                            <i class="my-1"></i>
+                          </span>
+                          <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+                        </button>
+                        <ul
+                          class="dropdown-menu dropdown-menu-end"
+                          aria-labelledby="bd-theme-text"
+                          style="--bs-dropdown-min-width: 8rem;"
+                        >
+                          <li>
+                            <button
+                              type="button"
+                              class="dropdown-item d-flex align-items-center active"
+                              data-bs-theme-value="light"
+                              aria-pressed="false"
+                            >
+                              <i class="bi bi-sun-fill me-2"></i>
+                              Light
+                              <i class="bi bi-check-lg ms-auto d-none"></i>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              type="button"
+                              class="dropdown-item d-flex align-items-center"
+                              data-bs-theme-value="dark"
+                              aria-pressed="false"
+                            >
+                              <i class="bi bi-moon-fill me-2"></i>
+                              Dark
+                              <i class="bi bi-check-lg ms-auto d-none"></i>
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              type="button"
+                              class="dropdown-item d-flex align-items-center"
+                              data-bs-theme-value="auto"
+                              aria-pressed="true"
+                            >
+                              <i class="bi bi-circle-fill-half-stroke me-2"></i>
+                              Auto
+                              <i class="bi bi-check-lg ms-auto d-none"></i>
+                            </button>
+                          </li>
+                        </ul>
+                      </li><!--end::Color Code Dropdown-->
+                    
+                    <!--begin::User Menu Dropdown-->
+                    <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="{% static 'analysis/assets/img/user2-160x160.jpg' %}" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">Alexander Pierce</span> </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
+                            <li class="user-header text-bg-primary"> <img src="{% static 'analysis/assets/img/user2-160x160.jpg' %}" class="rounded-circle shadow" alt="User Image">
+                                <p>
+                                    Alexander Pierce - Web Developer
+                                    <small>Member since Nov. 2023</small>
+                                </p>
+                            </li> <!--end::User Image--> <!--begin::Menu Body-->
+                            <li class="user-body"> <!--begin::Row-->
+                                <div class="row">
+                                    <div class="col-4 text-center"> <a href="#"></a> </div>
+                                    <div class="col-4 text-center"> <a href="#"></a> </div>
+                                    <div class="col-4 text-center"> <a href="#"></a> </div>
+                                </div> <!--end::Row-->
+                            </li> <!--end::Menu Body--> <!--begin::Menu Footer-->
+                            <li class="user-footer"> <a href="#" class="btn btn-default btn-flat">Profile</a> <a href="#" class="btn btn-default btn-flat float-end">Sign out</a> </li> <!--end::Menu Footer-->
+                        </ul>
+                    </li> <!--end::User Menu Dropdown-->
+                </ul> <!--end::End Navbar Links-->
+            </div> <!--end::Container-->
+        </nav> <!--end::Header--> <!--begin::Sidebar-->
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
+            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="{% url 'analysis:index' %}" class="brand-link"> <!--begin::Brand Image--> <img src="{% static 'analysis/assets/img/mdvpLogo.png' %}" alt="MDVP Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">TEAM 3</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-wrapper">
+                <nav class="mt-2"> <!--begin::Sidebar Menu-->
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item"> 
+                            <a href="{% url 'analysis:index' %}" class="nav-link active"> <!-- Direct link to index.html -->
+                                <i class="nav-icon bi bi-speedometer"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                           
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
+                                <p>
+                                    DATA ANALYSIS
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <div href="./widgets/small-box.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>Box Office</p>
+                                </div> </li>
+                                <li class="nav-item"> <div href="./widgets/info-box.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>Genre Insights</p>
+                                </div> </li>
+                                <li class="nav-item"> <div href="./widgets/cards.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>Movie Runtime</p>
+                                </div> </li>
+                                <li class="nav-item"> <div href="./widgets/cards.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>Language Diversity</p>
+                                </div> </li>    
+                            </ul>
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-tree-fill"></i>
+                                <p>
+                                    SENTIMENT ANALYSIS
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <div href="./UI/general.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>Word Cloud</p>
+                                </div> </li>
+                                <li class="nav-item"> <div href="./UI/icons.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>Reviews Analysis</p>
+                                </div> </li>                              
+                            </ul>
+                        </li>
+                        <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-pencil-square"></i>
+                                <p>
+                                    AI INSIGHTS
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item"> <div href="./forms/general.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>Trend Analysis</p>
+                                </div> </li>
+                                <li class="nav-item"> <div href="./forms/general.html" class="nav-link"> <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                        <p>AI Reports</p>
+                                </div> </li>
+                            </ul>
+                        </li>
+                    </ul> <!--end::Sidebar Menu-->
+                </nav>
+            </div> <!--end::Sidebar Wrapper-->
+        </aside> <!--end::Sidebar--> <!--begin::App Main-->
+        <main class="app-main"> <!--begin::App Content Header-->
+            <div class="app-content-header"> <!--begin::Container-->
+                <div class="container-fluid"> <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="mb-0 platform-title">MOVIE DATA VISUALIZATIONS PLATFORM</h3>
+                        </div>
+                        <div class="col-sm-12">
+                            <ol class="breadcrumb float-sm-end">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Dashboard v3
+                                </li>
+                            </ol>
+                        </div>
+                    </div> <!--end::Row-->
+                </div> <!--end::Container-->
+            </div>
+            <div class="app-content"> <!--begin::Container-->
+                <div class="container-fluid"> <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="card mb-4">
+                                <div class="card-header border-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class="card-title">Distributions of Movie Releases by Year Intervals </h3> <a href="javascript:void(0);" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">View Report</a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        
+                                    </div> <!-- /.d-flex -->
+                                    <div class="position-relative mb-4">
+                                    <!-- ECharts container goes here -->
+                                    <div id="movie-by-intervals-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
+                                    </div><!-- ECharts container -->
+                                    </div>
+                                </div>
+                            </div> <!-- /.card -->
+                            <div class="card mb-4">
+                                <div class="card-header border-0">
+                                    <h3 class="card-title">Movie Lists</h3>
+                                    <div class="card-tools"> <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-download"></i> </a> <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-list"></i> </a> </div>
+                                </div>
+                                <div class="card-body table-responsive p-0">
+                                    
+                            </div> <!-- /.card -->
+                        </div> <!-- /.col-md-6 -->
+                        <div class="col-lg-12">
+                            <div class="card mb-4">
+                                <div class="card-header border-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h3 class="card-title">Movie Revenue</h3> <a href="javascript:void(0);" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">View Report</a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <p class="d-flex flex-column"> <span class="fw-bold fs-5">$18,230.00</span> <span>BoxOffice Over Time</span> </p>
+                                        <p class="ms-auto d-flex flex-column text-end"> <span class="text-success"> <i class="bi bi-arrow-up"></i> 33.1%
+                                            </span> <span class="text-secondary">Since Past Year</span> </p>
+                                    </div> <!-- /.d-flex -->
+                                    <div class="position-relative mb-4">
+                                        <div id="sales-chart"></div>
+                                    </div>
+                                    <div class="d-flex flex-row justify-content-end"> <span class="me-2"> <i class="bi bi-square-fill text-primary"></i> This year
+                                        </span> <span> <i class="bi bi-square-fill text-secondary"></i> Last year
+                                        </span> </div>
+                                </div>
+                            </div> <!-- /.card -->
+                            <div class="card">
+                                <div class="card-header border-0">
+                                    <h3 class="card-title">Overview</h3>
+                                    <div class="card-tools"> <a href="#" class="btn btn-sm btn-tool"> <i class="bi bi-download"></i> </a> <a href="#" class="btn btn-sm btn-tool"> <i class="bi bi-list"></i> </a> </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                                        <p class="text-success fs-2"> <svg height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"></path>
+                                            </svg> </p>
+                                        <p class="d-flex flex-column text-end"> <span class="fw-bold"> <i class="bi bi-graph-up-arrow text-success"></i> 12%
+                                            </span> <span class="text-secondary">REVIEWS RATE</span> </p>
+                                    </div> <!-- /.d-flex -->
+                                    <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                                        <p class="text-info fs-2"> <svg height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
+                                            </svg> </p>
+                                        <p class="d-flex flex-column text-end"> <span class="fw-bold"> <i class="bi bi-graph-up-arrow text-info"></i> 0.8%
+                                            </span> <span class="text-secondary">SALES RATE</span> </p>
+                                    </div> <!-- /.d-flex -->
+                                    <div class="d-flex justify-content-between align-items-center mb-0">
+                                        <p class="text-danger fs-2"> <svg height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path>
+                                            </svg> </p>
+                                        <p class="d-flex flex-column text-end"> <span class="fw-bold"> <i class="bi bi-graph-down-arrow text-danger"></i>
+                                                1%
+                                            </span> <span class="text-secondary">VIEWING RATE</span> </p>
+                                    </div> <!-- /.d-flex -->
+                                </div>
+                            </div>
+                        </div> <!-- /.col-md-6 -->
+                    </div> <!--end::Row-->
+                </div> <!--end::Container-->
+            </div> <!--end::App Content-->
+        </main> <!--end::App Main--> <!--begin::Footer-->
+        <footer class="app-footer"> <!--begin::To the end-->
+            <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
+                Copyright &copy; 2014-2024&nbsp;
+                <a href="https://adminlte.io" class="text-decoration-none"></a>.
+            </strong>
+            All rights reserved.
+            <!--end::Copyright-->
+        </footer> <!--end::Footer-->
+    </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script> <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="{% static 'analysis/js/adminlte.js' %}"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script>
+        const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
+        const Default = {
+            scrollbarTheme: "os-theme-light",
+            scrollbarAutoHide: "leave",
+            scrollbarClickScroll: true,
+        };
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+            if (
+                sidebarWrapper &&
+                typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== "undefined"
+            ) {
+                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: Default.scrollbarTheme,
+                        autoHide: Default.scrollbarAutoHide,
+                        clickScroll: Default.scrollbarClickScroll,
+                    },
+                });
+            }
+        });
+    </script> <!--end::OverlayScrollbars Configure--> <!-- OPTIONAL SCRIPTS --> <!-- apexcharts -->
+    
+    <script>
+        
+
+        
+    </script> <!--end::Script-->
+
+
+<!-- Insert the movie-by-intervals-chart script here-->
+
+<!-- ECharts container -->
+<div id="movie-by-intervals-chart" style="width: 100%; height: 400px;"></div>
+
+<!-- ECharts script -->
+<script src="https://fastly.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+
+<script type="text/javascript">
+  // Get data from Django, converting it to a JavaScript object
+  var chartData = JSON.parse('{{ list_joson1|safe|escapejs }}');  // Use escapejs to escape special characters
+  console.log(chartData);  // Check what data is being passed
+
+  var dom = document.getElementById('movie-by-intervals-chart');
+  var myChart = echarts.init(dom, { renderer: 'canvas', useDirtyRect: false });
+
+  // Light theme options
+  var lightThemeOption = {
+    backgroundColor: '#fff', // Light background
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left',
+      top: 'middle',
+      textStyle: {
+        color: '#000' // Black text for light theme
+      }
+    },
+    series: [
+      {
+        name: 'Movie Releases',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold',
+            color: '#000' // Emphasized text color for light theme
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: chartData // Use the data from Django
+      }
+    ]
+  };
+
+  // Dark theme options
+  var darkThemeOption = {
+    backgroundColor: '#1F1F3A', // Dark background
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left',
+      top: 'middle',
+      textStyle: {
+        color: '#fff' // White text for dark theme
+      }
+    },
+    series: [
+      {
+        name: 'Movie Releases',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#333',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold',
+            color: '#fff' // Emphasized text color for dark theme
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: chartData // Use the data from Django
+      }
+    ]
+  };
+
+  // Function to detect the theme based on the data-bs-theme attribute
+  function detectTheme() {
+    var theme = document.documentElement.getAttribute("data-bs-theme");
+    return theme === "dark" ? "dark" : "light"; // Defaults to light if not dark
+  }
+
+  // Function to initialize or update the chart with the correct theme
+  function initChart() {
+    myChart.clear(); // Clear the previous chart options
+    var theme = detectTheme(); // Get the current theme
+    if (theme === "dark") {
+      myChart.setOption(darkThemeOption); // Apply dark theme options
+    } else {
+      myChart.setOption(lightThemeOption); // Apply light theme options
+    }
+  }
+
+  // Initialize the chart when the page loads
+  initChart();
+
+  // Listen for changes to the data-bs-theme attribute and update the chart
+  const observer = new MutationObserver(() => {
+    initChart(); // Reinitialize the chart when the theme changes
+  });
+
+  // Observe changes to the data-bs-theme attribute
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+
+  // Ensure the chart resizes with the window
+  window.addEventListener('resize', myChart.resize);
+</script>
+
+
+
+
+
+<!-- Insert the Color Mode Toggler script here -->
+<script>    
+// Color Mode Toggler
+(() => {
+  "use strict";
+
+  const storedTheme = localStorage.getItem("theme");
+
+  const getPreferredTheme = () => {
+    if (storedTheme) {
+      return storedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+
+  const setTheme = function (theme) {
+    if (
+      theme === "auto" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      document.documentElement.setAttribute("data-bs-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-bs-theme", theme);
+    }
+  };
+
+  setTheme(getPreferredTheme());
+
+    const showActiveTheme = (theme, focus = false) => {
+    const themeSwitcher = document.querySelector("#bd-theme");
+
+    if (!themeSwitcher) {
+      return;
+    }
+
+    const themeSwitcherText = document.querySelector("#bd-theme-text");
+    const activeThemeIcon = document.querySelector(".theme-icon-active i");
+    const btnToActive = document.querySelector(
+      `[data-bs-theme-value="${theme}"]`
+    );
+    const svgOfActiveBtn = btnToActive.querySelector("i").getAttribute("class");
+
+    for (const element of document.querySelectorAll("[data-bs-theme-value]")) {
+      element.classList.remove("active");
+      element.setAttribute("aria-pressed", "false");
+    }
+
+    btnToActive.classList.add("active");
+    btnToActive.setAttribute("aria-pressed", "true");
+    activeThemeIcon.setAttribute("class", svgOfActiveBtn);
+    const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`;
+    themeSwitcher.setAttribute("aria-label", themeSwitcherLabel);
+
+    if (focus) {
+      themeSwitcher.focus();
+    }
+  };
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      if (storedTheme !== "light" || storedTheme !== "dark") {
+        setTheme(getPreferredTheme());
+      }
+    });
+
+  window.addEventListener("DOMContentLoaded", () => {
+    showActiveTheme(getPreferredTheme());
+
+    for (const toggle of document.querySelectorAll("[data-bs-theme-value]")) {
+      toggle.addEventListener("click", () => {
+        const theme = toggle.getAttribute("data-bs-theme-value");
+        localStorage.setItem("theme", theme);
+        setTheme(theme);
+        showActiveTheme(theme, true);
+      });
+    }
+  });
+})();
+</script>
+
+
+<script>
+  // Hide specific containers when the page loads
+  window.onload = function() {
+      document.querySelector('.sales-container').style.display = 'none';
+      document.querySelector('.store-overview-container').style.display = 'none';
+  };
+  </script>
+
+
+</body><!--end::Body-->
+
+</html>
