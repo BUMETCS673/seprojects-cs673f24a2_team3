@@ -1,1 +1,1 @@
-This folder contains all demo vidoes
+This folder contains the demo video for the IMDB Movie Data Analysis and Visualization Platform. The platform was developed to process and present large datasets from the film industry, particularly focusing on IMDB data. This project provides a structured solution for visualizing movie releases, reviews, ratings, and production details to identify trends and gather insights effectively.
