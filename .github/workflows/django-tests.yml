@@ -27,6 +27,11 @@ jobs:
           - 3307:3306
 
     steps:
+      - name: Clean up any existing containers using port 3306
+        run: |
+          docker ps -q --filter "expose=3306" | xargs -r docker stop
+          docker ps -a -q --filter "expose=3306" | xargs -r docker rm
+
       - name: Check out the code
         uses: actions/checkout@v2
 
