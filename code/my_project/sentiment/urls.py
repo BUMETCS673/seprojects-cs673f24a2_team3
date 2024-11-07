@@ -3,6 +3,9 @@ from . import views
 
 app_name = 'sentiment'
 
+print("Loading URL patterns")
+
 urlpatterns = [
-    path('wordcloud/', views.generate_wordcloud, name='generate_wordcloud'),
+    path('', views.index, name='index'),  # Home page
+    path('wordcloud/', views.generate_wordcloud, name='generate_wordcloud'),  # Word Cloud page
 ]

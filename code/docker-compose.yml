@@ -1,10 +1,26 @@
-
 services:
+  db:
+    container_name: my_sql_db      # Specify the container name for MySQL
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=movie_data
+      - MYSQL_ROOT_PASSWORD=snowBall2024
+
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/  # Mount the SQL init folder
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    
   app:
-    container_name: my_django_app   # Specify the container name for the Django app
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: xuanshengxia/my_django_app:latest   # Specify the container name for the Django app
     volumes:
       - ./requirements.txt:/app/requirements.txt           # Mount requirements.txt from team3_docker
       - ./my_project:/app/my_project                       # Mount the my_project directory
@@ -22,27 +38,6 @@ services:
       - DB_PORT=3306
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-
-  db:
-    container_name: my_sql_db      # Specify the container name for MySQL
-    image: mysql:8.0
-    environment:
-      - MYSQL_DATABASE=movie_data
-      - MYSQL_ROOT_PASSWORD=snowBall2024
-
-
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/  # Mount the SQL init folder
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: always
-    command: --default-authentication-plugin=mysql_native_password
 volumes:
     mysql_data:
 

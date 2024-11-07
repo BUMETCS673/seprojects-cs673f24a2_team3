@@ -1,0 +1,51 @@
+name: Django Test Suite
+
+on:
+  push:
+    branches:
+      - development
+  pull_request:
+    branches:
+      - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: snowBall2024
+          MYSQL_DATABASE: movie_data
+        options: >-
+          --health-cmd "mysqladmin ping -h localhost"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 3306:3306
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Install Docker Compose
+        run: sudo apt-get install docker-compose -y
+
+      - name: Set up Docker Compose and Build
+        run: docker-compose -f code/docker-compose.yml up --build -d
+
+      - name: Wait for MySQL to be healthy
+        run: |
+          until [ "$(docker inspect -f '{{.State.Health.Status}}' my_sql_db)" == "healthy" ]; do
+            echo "Waiting for MySQL to be healthy..."
+            sleep 5
+          done
+          echo "MySQL is healthy."
+
+      - name: Run Django Tests
+        run: docker-compose -f code/docker-compose.yml exec -T app python manage.py test
+
+      - name: Shut down Docker Compose
+        run: docker-compose -f code/docker-compose.yml down

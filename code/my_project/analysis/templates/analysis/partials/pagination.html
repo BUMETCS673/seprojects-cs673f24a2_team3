@@ -1,0 +1,40 @@
+<ul class="pagination pagination-sm mb-0 d-flex justify-content-center">
+    <!-- First Page Button -->
+    {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link ajax-pagination" href="?page=1">«</a>
+        </li>
+    {% endif %}
+
+    <!-- Previous Page Button -->
+    {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link ajax-pagination" href="?page={{ page_obj.previous_page_number }}">‹</a>
+        </li>
+    {% endif %}
+
+    <!-- Page Number Links -->
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+            <li class="page-item">
+                <a class="page-link ajax-pagination" href="?page={{ num }}">{{ num }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+
+    <!-- Next Page Button -->
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link ajax-pagination ajax-pagination-next" href="?page={{ page_obj.next_page_number }}">›</a>
+        </li>
+    {% endif %}
+
+    <!-- Last Page Button -->
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link ajax-pagination" href="?page={{ page_obj.paginator.num_pages }}">»</a>
+        </li>
+    {% endif %}
+</ul>
