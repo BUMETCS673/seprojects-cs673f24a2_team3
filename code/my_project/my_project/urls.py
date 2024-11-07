@@ -25,4 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),  # Map the root URL to the index view
     path('analysis/', include('analysis.urls')),  # Include URLs from the analysis app
+    path('sentiment/', include('sentiment.urls')),  # Include URLs from the sentiment app
+
 ]

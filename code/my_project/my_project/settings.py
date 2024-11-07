@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'my_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',  # Use MySQL as the database engine
+        'ENGINE': 'django.db.backends.mysql',  # Use MySQL as the database engine
         'NAME': 'movie_data',                        # The database name
         'USER': 'selina',                      # The database user
         'PASSWORD': 'snowBall',              # The password for the database user

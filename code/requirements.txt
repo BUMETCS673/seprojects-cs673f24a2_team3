@@ -29,4 +29,5 @@ typing-extensions==4.1.1
 urllib3==1.26.8
 mysql-connector-python>=8.0.27,<9.0.0
 sqlalchemy>=1.4
-
+nltk
+wordcloud
