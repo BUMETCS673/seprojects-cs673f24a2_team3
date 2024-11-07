@@ -48,6 +48,10 @@ jobs:
             sleep 10
           done
           echo "MySQL is healthy."
+      - name: Test database connection
+        run: |
+           docker-compose -f code/docker-compose.yml exec app mysql -u root -p'snowBall2024' -h db -e "SHOW DATABASES;"
+
 
       - name: Check MySQL Logs
         run: docker logs my_sql_db
