@@ -50,7 +50,7 @@ jobs:
           echo "MySQL is healthy."
       - name: Test database connection
         run: |
-          docker-compose -f code/docker-compose.yml exec -T app mysql -u root -p'snowBall2024' -h db -e "SHOW DATABASES;"
+          docker-compose -f code/docker-compose.yml exec -T db mysql -u root -p'snowBall2024' -h localhost -e "SHOW DATABASES;"
 
 
       - name: Check MySQL Logs
