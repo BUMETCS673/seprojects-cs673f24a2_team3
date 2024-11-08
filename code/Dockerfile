@@ -22,6 +22,12 @@ COPY requirements.txt /app/
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+
+COPY wait-for-it.sh /app/wait-for-it.sh
+
+# Make it executable
+RUN chmod +x /app/wait-for-it.sh
+
 # Copy the rest of your project code into the container
 COPY . /app/
 
@@ -30,7 +36,7 @@ EXPOSE 8000
 
 WORKDIR /app/my_project
 # Wait for MySQL to be available, then start the Django development server
-CMD ["sh", "-c", "until nc -z $DB_HOST $DB_PORT; do echo 'Waiting for MySQL...'; sleep 3; done; python manage.py runserver 0.0.0.0:8000"]
+CMD ["sh", "-c", "until nc -z $DB_HOST $DB_PORT; do echo 'Waiting for MySQL...'; sleep 3; done; python /app/my_project/manage.py runserver 0.0.0.0:8000"]
 
  # Add the my_project directory to PYTHONPATH
 ENV PYTHONPATH="/app/my_project:${PYTHONPATH}"

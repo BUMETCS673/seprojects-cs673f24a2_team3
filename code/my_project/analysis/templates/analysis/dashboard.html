@@ -4,9 +4,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>MDVP | Dashboard V3 </title><!--begin::Primary Meta Tags-->
+    <title>MDVP | Dashboard </title><!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="MDVP | Dashboard v3">
+    <meta name="title" content="MDVP | Dashboard">
     <meta name="author" content="ColorlibHQ">
     <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS.">
     <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"><!--end::Primary Meta Tags--><!--begin::Fonts-->
@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous"><!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Third Party Plugin(Bootstrap Icons)-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{% static 'analysis/css/adminlte.css' %}"><!--end::Required Plugin(AdminLTE)--><!-- apexcharts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet"><!-- custom font -->
+    <link rel="icon" href="{% static 'analysis/favicon.png' %}" type="image/png">
+
     <!-- Include ECharts library -->
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <style> 
@@ -125,10 +128,10 @@
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                         <li class="nav-item"> 
-                            <a href="{% url 'analysis:dashboard' %}" class="nav-link active"> <!-- Direct link to index.html -->
+                            <a href="{% url 'analysis:dashboard' %}" class="nav-link active"> <!-- Direct link to dashboard.html -->
                                 <i class="nav-icon bi bi-speedometer"></i>
                                 <p>
-                                    Dashboard
+                                    DASHBOARD
                                 </p>
                             </a>
                            
@@ -192,108 +195,153 @@
             </div> <!--end::Sidebar Wrapper-->
         </aside> <!--end::Sidebar--> <!--begin::App Main-->
         <main class="app-main"> <!--begin::App Content Header-->
-            <div class="app-content-header"> <!--begin::Container-->
-                <div class="container-fluid"> <!--begin::Row-->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h3 class="mb-0 platform-title">MOVIE DATA VISUALIZATIONS PLATFORM</h3>
-                        </div>
-                        <div class="col-sm-12">
-                            <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Dashboard v3
-                                </li>
-                            </ol>
-                        </div>
-                    </div> <!--end::Row-->
-                </div> <!--end::Container-->
-            </div>
-            <div class="app-content"> <!--begin::Container-->
-                <div class="container-fluid"> <!--begin::Row-->
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="card mb-4">
-                                <div class="card-header border-0">
-                                    <div class="d-flex justify-content-between">
-                                        <h3 class="card-title">Distributions of Movie Releases by Year Intervals </h3> <a href="javascript:void(0);" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">View Report</a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        
-                                    </div> <!-- /.d-flex -->
-                                    <div class="position-relative mb-4">
-                                    <!-- ECharts container goes here -->
-                                    <div id="movie-by-intervals-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
-                                    </div><!-- ECharts container -->
-                                    </div>
-                                </div>
-                            </div> <!-- /.card -->
-                            <div class="card mb-4">
-                                <div class="card-header border-0">
-                                    <h3 class="card-title">Movie Lists</h3>
-                                    <div class="card-tools"> <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-download"></i> </a> <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-list"></i> </a> </div>
-                                </div>
-                                <div class="card-body table-responsive p-0">
-                                    
-                            </div> <!-- /.card -->
-                        </div> <!-- /.col-md-6 -->
-                        <div class="col-lg-12">
-                            <div class="card mb-4">
-                                <div class="card-header border-0">
-                                    <div class="d-flex justify-content-between">
-                                        <h3 class="card-title">Movie Revenue</h3> <a href="javascript:void(0);" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">View Report</a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <p class="d-flex flex-column"> <span class="fw-bold fs-5">$18,230.00</span> <span>BoxOffice Over Time</span> </p>
-                                        <p class="ms-auto d-flex flex-column text-end"> <span class="text-success"> <i class="bi bi-arrow-up"></i> 33.1%
-                                            </span> <span class="text-secondary">Since Past Year</span> </p>
-                                    </div> <!-- /.d-flex -->
-                                    <div class="position-relative mb-4">
-                                        <div id="sales-chart"></div>
-                                    </div>
-                                    <div class="d-flex flex-row justify-content-end"> <span class="me-2"> <i class="bi bi-square-fill text-primary"></i> This year
-                                        </span> <span> <i class="bi bi-square-fill text-secondary"></i> Last year
-                                        </span> </div>
-                                </div>
-                            </div> <!-- /.card -->
-                            <div class="card">
-                                <div class="card-header border-0">
-                                    <h3 class="card-title">Overview</h3>
-                                    <div class="card-tools"> <a href="#" class="btn btn-sm btn-tool"> <i class="bi bi-download"></i> </a> <a href="#" class="btn btn-sm btn-tool"> <i class="bi bi-list"></i> </a> </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                        <p class="text-success fs-2"> <svg height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3"></path>
-                                            </svg> </p>
-                                        <p class="d-flex flex-column text-end"> <span class="fw-bold"> <i class="bi bi-graph-up-arrow text-success"></i> 12%
-                                            </span> <span class="text-secondary">REVIEWS RATE</span> </p>
-                                    </div> <!-- /.d-flex -->
-                                    <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                                        <p class="text-info fs-2"> <svg height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
-                                            </svg> </p>
-                                        <p class="d-flex flex-column text-end"> <span class="fw-bold"> <i class="bi bi-graph-up-arrow text-info"></i> 0.8%
-                                            </span> <span class="text-secondary">SALES RATE</span> </p>
-                                    </div> <!-- /.d-flex -->
-                                    <div class="d-flex justify-content-between align-items-center mb-0">
-                                        <p class="text-danger fs-2"> <svg height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path>
-                                            </svg> </p>
-                                        <p class="d-flex flex-column text-end"> <span class="fw-bold"> <i class="bi bi-graph-down-arrow text-danger"></i>
-                                                1%
-                                            </span> <span class="text-secondary">VIEWING RATE</span> </p>
-                                    </div> <!-- /.d-flex -->
+          <div class="app-content"> <!-- Begin::Container -->
+            <div class="container-fluid">
+                <!-- First Row -->
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="card mb-4">
+                            <div class="card-header border-0">
+                                <div class="d-flex ">
+                                    <h3 class="card-title custom-title">Distributions of Movie Releases by Year Intervals</h3>
+                                    <!-- <a href="javascript:void(0);" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">View Report</a> -->
                                 </div>
                             </div>
-                        </div> <!-- /.col-md-6 -->
-                    </div> <!--end::Row-->
-                </div> <!--end::Container-->
-            </div> <!--end::App Content-->
+                            <div class="card-body">
+                                <div id="movie-by-intervals-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
+                            </div>
+                        </div> <!-- /.card -->
+                    </div> <!-- /.col-lg-7 -->
+        
+                    <div class="col-lg-5">
+                        <div class="card mb-4">
+                            <div class="card-header border-0">
+                              <div class="d-flex ">
+                                <h3 class="card-title custom-title">Top Movie Production Companies</h3>
+                              </div>
+                            </div>
+                            <!-- Dropdown overlay inside the chart area -->
+                            <div class="filter-overlay position-absolute d-flex" style="top: 50px; right: 10px; z-index: 10;">
+                              <label for="ranking-filter" class="me-2"></label>
+                              <select id="ranking-filter" class="form-select form-select-sm" style="width: auto;">
+                                  <option value="5">Top 5</option>
+                                  <option value="10"selected>Top 10</option>
+                                  <option value="15">Top 15</option>
+                                  <option value="20">Top 20</option>
+                              </select>
+                            </div>
+                            <div class="card-body">
+                              <div id="top-production-companies-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
+                            </div>
+                        </div> <!-- /.card -->
+                    </div> <!-- /.col-lg-5 -->
+                </div> <!-- /.first row -->
+        
+                <!-- Second Row for Award VS Rating bubble chart -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header border-0">
+                              <div class="d-flex ">
+                                <h3 class="card-title custom-title">Ratings VS Awards</h3>
+                              </div> 
+                                <div class="card-tools">
+                                    <a href="#" class="btn btn-tool btn-sm">
+                                        <i class="bi bi-download"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-tool btn-sm">
+                                        <i class="bi bi-list"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <!-- Contents for Award VS Rating bubble chart here -->
+                              <div id="award-bubble-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
+                            </div>
+                        </div> <!-- /.card -->
+
+                    </div> <!-- /.col-lg-12 -->
+                </div> <!-- /.second row -->
+                <!-- Third Row for Rating distribution chart -->
+                <div class="row">
+                  <div class="col-lg-5"><!-- /.col-lg-5 -->
+                    <div class="card mb-4">
+                        <div class="card-header border-0">
+                          <div class="d-flex">
+                            <h3 class="card-title custom-title">Movie Production by Country</h3>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div id="movies-produced-funnel" style="min-height: 250px; height: 600px; width: 100%;"></div>
+                        </div>
+                    </div> <!-- /.card -->
+                </div> <!-- /.col-lg-5 -->
+                  <div class="col-lg-7">
+                      <div class="card mb-4">
+                          <div class="card-header border-0">
+                            <div class="d-flex">
+                              <h3 class="card-title custom-title">Ratings Distribution</h3>
+                            </div>
+                              <div class="card-tools">
+                                  <a href="#" class="btn btn-tool btn-sm">
+                                      <i class="bi bi-download"></i>
+                                  </a>
+                                  <a href="#" class="btn btn-tool btn-sm">
+                                      <i class="bi bi-list"></i>
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="card-body table-responsive p-0">
+                              <!-- Contents for rating distribution chart here -->
+                            <div id="rating-distribution-chart" style="min-height: 250px; height: 600px; width: 100%;"></div>
+                          </div>
+                      </div> <!-- /.card -->
+                  </div> <!-- /.col-lg-7 -->
+                  
+                 <!-- Movies List Table (AJAX-enabled) -->
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card mb-4">
+                        <div class="card-header">
+                          <div class="d-flex">
+                          <h3 class="card-title custom-title">List of Movies</h3>
+                          </div>
+                          <div class="card-tools">
+                            <ul class="pagination pagination-sm float-end">
+                              <div class="pagination-container">
+                                {% include "analysis/partials/pagination.html" %}
+                              </div>
+                            </ul>
+                          </div>                                  
+                        </div> <!-- /.card-header -->
+
+                        <!-- Table structure with the container for AJAX -->
+                        <div class="card-body p-0">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Image Preview</th>
+                                <th>Title</th>
+                                <th>Year</th>
+                                <th>Ontime</th>
+                                <th>Score</th>
+                              </tr>
+                            </thead>
+                            <tbody id="movie-table-container">
+                              {% include 'analysis/partials/movie_table.html' %}
+                            </tbody>
+                          </table>
+                        </div> <!-- /.card-body -->
+                      </div> <!-- /.card -->
+                    </div> <!-- /.col-12 -->
+                  </div> <!-- /.row --> 
+
+                
+              
+            </div> <!-- /.container-fluid -->
+        </div> <!-- /.app-content -->
+        
+
         </main> <!--end::App Main--> <!--begin::Footer-->
         <footer class="app-footer"> <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline">Anything you want</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
@@ -339,145 +387,104 @@
     </script> <!--end::Script-->
 
 
-<!-- Insert the movie-by-intervals-chart script here-->
+<!-- Insert the Echart script here-->
 
-<!-- ECharts container -->
-<div id="movie-by-intervals-chart" style="width: 100%; height: 400px;"></div>
-
-<!-- ECharts script -->
+<!-- ECharts Library from CDN -->
 <script src="https://fastly.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
-
 <script type="text/javascript">
-  // Get data from Django, converting it to a JavaScript object
-  var chartData = JSON.parse('{{ list_joson1|safe|escapejs }}');  // Use escapejs to escape special characters
-  console.log(chartData);  // Check what data is being passed
+  // Define `topProductionCompaniesChart` as a global variable
+  let topProductionCompaniesChart;
 
-  var dom = document.getElementById('movie-by-intervals-chart');
-  var myChart = echarts.init(dom, { renderer: 'canvas', useDirtyRect: false });
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded and parsed.");
 
-  // Light theme options
-  var lightThemeOption = {
-    backgroundColor: '#fff', // Light background
-    tooltip: {
-      trigger: 'item'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left',
-      top: 'middle',
-      textStyle: {
-        color: '#000' // Black text for light theme
-      }
-    },
-    series: [
-      {
-        name: 'Movie Releases',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-          position: 'center'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold',
-            color: '#000' // Emphasized text color for light theme
-          }
-        },
-        labelLine: {
-          show: false
-        },
-        data: chartData // Use the data from Django
-      }
-    ]
-  };
+    // Initialize the global chart instance
+    topProductionCompaniesChart = echarts.init(document.getElementById('top-production-companies-chart'));
+    console.log("topProductionCompaniesChart initialized:", topProductionCompaniesChart);
 
-  // Dark theme options
-  var darkThemeOption = {
-    backgroundColor: '#1F1F3A', // Dark background
-    tooltip: {
-      trigger: 'item'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left',
-      top: 'middle',
-      textStyle: {
-        color: '#fff' // White text for dark theme
-      }
-    },
-    series: [
-      {
-        name: 'Movie Releases',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#333',
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-          position: 'center'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold',
-            color: '#fff' // Emphasized text color for dark theme
-          }
-        },
-        labelLine: {
-          show: false
-        },
-        data: chartData // Use the data from Django
-      }
-    ]
-  };
+    // Parse chart data from Django context
+    const movieIntervalsData = JSON.parse('{{ movie_distribution_by_year_intervals|safe|escapejs }}');
+    const topCompaniesData = JSON.parse('{{ top_companies|safe|escapejs }}');
+    const awardBubbleData = JSON.parse('{{ award_bubble_data|safe|escapejs }}');
+    const ratingDistributionData = JSON.parse('{{ rating_distribution|safe|escapejs }}'); 
+    const funnelData = JSON.parse('{{ funnel_data|safe|escapejs }}'); 
 
-  // Function to detect the theme based on the data-bs-theme attribute
-  function detectTheme() {
-    var theme = document.documentElement.getAttribute("data-bs-theme");
-    return theme === "dark" ? "dark" : "light"; // Defaults to light if not dark
-  }
+    // Initialize charts
+    initChartWithTheme('movie-by-intervals-chart', movieIntervalsData, 'pie');
+    initChartWithTheme('top-production-companies-chart', topCompaniesData, 'bar');
+    initChartWithTheme('award-bubble-chart', awardBubbleData, 'bubble');
+    initChartWithTheme('rating-distribution-chart', ratingDistributionData, 'nested_pie'); 
+    initChartWithTheme('movies-produced-funnel', funnelData, 'funnel');
 
-  // Function to initialize or update the chart with the correct theme
-  function initChart() {
-    myChart.clear(); // Clear the previous chart options
-    var theme = detectTheme(); // Get the current theme
-    if (theme === "dark") {
-      myChart.setOption(darkThemeOption); // Apply dark theme options
+    
+    function updateTopProductionCompaniesChart(data) {
+    console.log("Data received for updateTopProductionCompaniesChart:", data);
+    
+    //topProductionCompaniesChart.clear();
+    console.log("Chart cleared successfully.");
+
+    // Define options with the new max
+    const options = {
+        title: {
+            text: `Top ${data.length}`,
+            left: 'center',
+            top: '5%',
+            textStyle: { color: '#fff' }
+        },
+        yAxis: {
+            type: 'category',
+            data: data.map(company => company.name),
+            inverse: true,
+        },
+        xAxis: {
+            type: 'value',
+        },
+        visualMap: {
+            min: Math.min(...data.map(item => item.value)),
+            max: Math.max(...data.map(item => item.value)), // Set min and max dynamically
+            orient: 'horizontal',
+            left: 'center',
+            text: ['High Score', 'Low Score'],
+            dimension: 0,
+            inRange: { color: ['#65B581', '#FFCE34', '#FD665F'] }, // Adjusted color range
+          },
+        series: [{
+            type: 'bar',
+            data: data.map(company => company.value),
+        }]
+    };
+    // Set options with the new max and series data
+    topProductionCompaniesChart.setOption(options);
+    //console.log("Chart updated with new options:", options);
+}
+
+
+    // Event listener to update the chart when the dropdown changes
+    const filterElement = document.getElementById("ranking-filter");
+    if (filterElement) {
+      console.log("Ranking filter found. Adding change event listener.");
+      filterElement.addEventListener("change", function() {
+        const topN = parseInt(this.value);
+        console.log(`Updating chart to show top ${topN} production companies`);
+
+        // AJAX request to fetch new data
+        fetch(`/analysis/dashboard/get-top-production-companies/?topN=${topN}`, {
+          headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Data fetched successfully:", data);
+          updateTopProductionCompaniesChart(data.data);
+        })
+        .catch(error => console.error("Error fetching data:", error));
+      });
     } else {
-      myChart.setOption(lightThemeOption); // Apply light theme options
+      console.error("Ranking filter element not found.");
     }
-  }
-
-  // Initialize the chart when the page loads
-  initChart();
-
-  // Listen for changes to the data-bs-theme attribute and update the chart
-  const observer = new MutationObserver(() => {
-    initChart(); // Reinitialize the chart when the theme changes
   });
-
-  // Observe changes to the data-bs-theme attribute
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
-
-  // Ensure the chart resizes with the window
-  window.addEventListener('resize', myChart.resize);
 </script>
-
-
+<!-- Link to charts-setup.js -->
+<script src="{% static 'analysis/js/charts-setup.js' %}"></script>
 
 
 
@@ -566,12 +573,83 @@
 </script>
 
 
+
 <script>
-  // Hide specific containers when the page loads
-  window.onload = function() {
-      document.querySelector('.sales-container').style.display = 'none';
-      document.querySelector('.store-overview-container').style.display = 'none';
-  };
+  document.addEventListener("DOMContentLoaded", function() {
+    // Attach click events to pagination links initially
+    attachPaginationClickEvents();
+
+    // Attach click event to the Next button
+    document.querySelector(".ajax-pagination-next").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Find the currently active page button
+        const activePageButton = document.querySelector(".pagination .page-item.active");
+
+        if (activePageButton) {
+            // Get the current page from the active page button
+            const currentPage = parseInt(activePageButton.getAttribute("data-page"));
+            const nextPage = currentPage + 1;
+
+            // Construct the URL for the next page
+            const url = `?page=${nextPage}`;
+
+            // Load the next page using AJAX
+            loadPage(url);
+        }
+    });
+});
+  
+  // Function to load a page via AJAX
+  function loadPage(url) {
+      fetch(url, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest"
+          }
+      })
+      .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+      })
+      .then(data => {
+          // Update the table content
+          document.getElementById("movie-table-container").innerHTML = data.html;
+  
+          // Update pagination container content with new pagination state (HTML passed from server-side)
+          document.querySelector(".pagination-container").innerHTML = data.pagination_html;
+  
+          // Re-attach pagination click events as the DOM has changed
+          attachPaginationClickEvents();
+      })
+      .catch(error => console.error("AJAX pagination fetch error:", error));
+  }
+  
+  // Function to attach click events to pagination links
+  function attachPaginationClickEvents() {
+      document.querySelectorAll(".ajax-pagination").forEach(function(link) {
+          link.addEventListener("click", function(event) {
+              event.preventDefault();
+              const url = link.getAttribute("href");
+              loadPage(url);
+          });
+      });
+  }
+  
+  // Function to update pagination links after each AJAX load
+  function updatePaginationLinks() {
+      const activePageButton = document.querySelector(".pagination .page-item.active");
+      if (activePageButton) {
+          const currentPage = parseInt(activePageButton.getAttribute("data-page"));
+          const nextPage = currentPage + 1;
+  
+          // Update the Next button to go to the incremented page number
+          document.querySelector(".ajax-pagination-next").setAttribute("href", `?page=${nextPage}`);
+          
+          console.log(`Pagination links updated. Current page: ${currentPage}, Next page URL: ?page=${nextPage}`);
+      } else {
+          console.error("Error updating pagination links: Active page button not found.");
+      }
+  }
   </script>
 
 
