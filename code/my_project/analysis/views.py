@@ -166,3 +166,33 @@ def index(request):
 
 
 
+
+
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .forms import SignUpForm
+
+# Signup View
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  # Hash the password
+            user.save()
+            login(request, user)  # Log the user in after signup
+            return redirect('home')  # Redirect to the homepage
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+# Login View (Using Django's built-in LoginView)
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+
+# Home View
+@login_required
+def home(request):
+    return render(request, 'home.html')
