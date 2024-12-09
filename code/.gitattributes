@@ -1,0 +1,15 @@
+# Handle line endings automatically for text files
+* text=auto
+
+# Explicitly declare files that should always have LF line endings
+*.sh text eol=lf
+*.yml text eol=lf
+*.py text eol=lf
+
+# Explicitly declare files that should always have CRLF line endings (Windows files)
+*.bat text eol=crlf
+
+# Ignore binary files
+*.png binary
+*.jpg binary
+*.gif binary

@@ -1,0 +1,398 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}MDVP{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'analysis/css/adminlte.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'analysis/favicon.png' %}" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="{% static 'analysis/js/charts-setup.js' %}"></script>
+    <!-- Include ECharts library -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style> 
+        .platform-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #d9695a;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <div class="app-wrapper">
+        <!-- Header -->
+        <nav class="app-header navbar navbar-expand bg-body">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                            <i class="bi bi-list"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none d-md-block">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item d-none d-md-block">
+                        <a href="#" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <!--begin::Fullscreen Toggle-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+                            <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                            <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i>
+                        </a>
+                    </li>
+                    <!--end::Fullscreen Toggle-->
+                    <!--begin::Color code dropdown menu-->
+                    <li class="nav-item dropdown">
+                      <button
+                        class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center"
+                        id="bd-theme"
+                        type="button"
+                        aria-expanded="false"
+                        data-bs-toggle="dropdown"
+                        data-bs-display="static"
+                      >
+                        <span class="theme-icon-active">
+                          <i class="my-1"></i>
+                        </span>
+                        <span class="d-lg-none ms-2" id="bd-theme-text">Toggle theme</span>
+                      </button>
+                      <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="bd-theme-text"
+                        style="--bs-dropdown-min-width: 8rem;"
+                      >
+                        <li>
+                          <button
+                            type="button"
+                            class="dropdown-item d-flex align-items-center active"
+                            data-bs-theme-value="light"
+                            aria-pressed="false"
+                          >
+                            <i class="bi bi-sun-fill me-2"></i>
+                            Light
+                            <i class="bi bi-check-lg ms-auto d-none"></i>
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            class="dropdown-item d-flex align-items-center"
+                            data-bs-theme-value="dark"
+                            aria-pressed="false"
+                          >
+                            <i class="bi bi-moon-fill me-2"></i>
+                            Dark
+                            <i class="bi bi-check-lg ms-auto d-none"></i>
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            class="dropdown-item d-flex align-items-center"
+                            data-bs-theme-value="auto"
+                            aria-pressed="true"
+                          >
+                            <i class="bi bi-circle-fill-half-stroke me-2"></i>
+                            Auto
+                            <i class="bi bi-check-lg ms-auto d-none"></i>
+                          </button>
+                        </li>
+                      </ul>
+                    </li><!--end::Color Code Dropdown-->  
+                       <!--begin::User Menu Dropdown-->
+                       <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img src="{% static 'analysis/assets/img/user2-160x160.jpg' %}" class="user-image rounded-circle shadow" alt="User Image"> <span class="d-none d-md-inline">Alexander Pierce</span> </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
+                            <li class="user-header text-bg-primary"> <img src="{% static 'analysis/assets/img/user2-160x160.jpg' %}" class="rounded-circle shadow" alt="User Image">
+                                <p>
+                                    Alexander Pierce - Web Developer
+                                    <small>Member since Nov. 2023</small>
+                                </p>
+                            </li> <!--end::User Image--> <!--begin::Menu Body-->
+                            <li class="user-body"> <!--begin::Row-->
+                                <div class="row">
+                                    <div class="col-4 text-center"> <a href="#"></a> </div>
+                                    <div class="col-4 text-center"> <a href="#"></a> </div>
+                                    <div class="col-4 text-center"> <a href="#"></a> </div>
+                                </div> <!--end::Row-->
+                            </li> <!--end::Menu Body--> <!--begin::Menu Footer-->
+                            <li class="user-footer"> <a href="#" class="btn btn-default btn-flat">Profile</a> <a href="#" class="btn btn-default btn-flat float-end">Sign out</a> </li> <!--end::Menu Footer-->
+                        </ul>
+                    </li> <!--end::User Menu Dropdown-->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+        <aside class="app-sidebar bg-body-secondary shadow">
+          <div class="sidebar-brand">
+              <a href="{% url 'analysis:index' %}" class="brand-link">
+                  <img src="{% static 'analysis/assets/img/mdvpLogo.png' %}" alt="MDVP Logo" class="brand-image opacity-75 shadow">
+                  <span class="brand-text fw-light">TEAM 3</span>
+              </a>
+          </div>
+          <div class="sidebar-wrapper">
+              <nav class="mt-2">
+                  <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+                    
+                      <!-- Dashboard -->
+                      <li class="nav-item" role="none">
+                          <a href="{% url 'analysis:dashboard' %}" class="nav-link">
+                              <i class="nav-icon bi bi-speedometer"></i>
+                              <p>DASHBOARD</p>
+                          </a>
+                      </li>
+                      
+                      <!-- Data Analysis Section -->
+                      <li class="nav-item" role="none">
+                          <a href="#" class="nav-link">
+                              <i class="nav-icon bi bi-box-seam-fill"></i>
+                              <p>
+                                  DATA ANALYSIS
+                                  <i class="nav-arrow bi bi-chevron-right"></i>
+                              </p>
+                          </a>
+                          <ul class="nav nav-treeview" role="group">
+                              <li class="nav-item" role="none">
+                                  <a href="{% url 'analysis:box_office' %}" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>Box Office</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item" role="none">
+                                  <a href="{% url 'analysis:genre_insights' %}" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>Genre Insights</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item" role="none">
+                                  <a href="{% url 'analysis:movie_runtime' %}" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>Movie Runtime</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item" role="none">
+                                  <a href="{% url 'analysis:language_diversity' %}" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>Language Diversity</p>
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      
+                      <!-- Sentiment Analysis Section -->
+                      <li class="nav-item">
+                          <a href="#" class="nav-link">
+                              <i class="nav-icon bi bi-speedometer"></i>
+                              <p>
+                                  SENTIMENT ANALYSIS
+                                  <i class="nav-arrow bi bi-chevron-right"></i>
+                              </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                  <a href="{% url 'analysis:wordCloud' %}" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>Word Cloud</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="#" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>Reviews Analysis</p>
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                      
+                      <!-- AI Insights Section -->
+                      <li class="nav-item">
+                          <a href="#" class="nav-link">
+                              <i class="nav-icon bi bi-pencil-square"></i>
+                              <p>
+                                  AI INSIGHTS
+                                  <i class="nav-arrow bi bi-chevron-right"></i>
+                              </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                              <li class="nav-item">
+                                  <a href="#" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>Trend Analysis</p>
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a href="#" class="nav-link">
+                                      <i class="nav-icon bi bi-circle" style="font-size: 0.5rem;"></i>
+                                      <p>AI Reports</p>
+                                  </a>
+                              </li>
+                          </ul>
+                      </li>
+                    </li> 
+                  </ul>
+              </nav>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <div class="app-content">
+                <div class="container-fluid">
+                    {% block content %}
+                    <!-- Page-specific content goes here -->
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <strong>Copyright &copy; 2024 MDVP Team 3</strong>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="{% static 'analysis/js/adminlte.js' %}"></script>
+  
+
+    
+    
+<!-- Insert the Color Mode Toggler script here -->
+<script>    
+  // Color Mode Toggler
+  (() => {
+    "use strict";
+  
+    const storedTheme = localStorage.getItem("theme");
+  
+    const getPreferredTheme = () => {
+      if (storedTheme) {
+        return storedTheme;
+      }
+  
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "dark";
+    };
+  
+    const setTheme = function (theme) {
+      if (
+        theme === "auto" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+      } else {
+        document.documentElement.setAttribute("data-bs-theme", theme);
+      }
+    };
+  
+    setTheme(getPreferredTheme());
+  
+      const showActiveTheme = (theme, focus = false) => {
+      const themeSwitcher = document.querySelector("#bd-theme");
+  
+      if (!themeSwitcher) {
+        return;
+      }
+  
+      const themeSwitcherText = document.querySelector("#bd-theme-text");
+      const activeThemeIcon = document.querySelector(".theme-icon-active i");
+      const btnToActive = document.querySelector(
+        `[data-bs-theme-value="${theme}"]`
+      );
+      const svgOfActiveBtn = btnToActive.querySelector("i").getAttribute("class");
+  
+      for (const element of document.querySelectorAll("[data-bs-theme-value]")) {
+        element.classList.remove("active");
+        element.setAttribute("aria-pressed", "false");
+      }
+  
+      btnToActive.classList.add("active");
+      btnToActive.setAttribute("aria-pressed", "true");
+      activeThemeIcon.setAttribute("class", svgOfActiveBtn);
+      const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`;
+      themeSwitcher.setAttribute("aria-label", themeSwitcherLabel);
+  
+      if (focus) {
+        themeSwitcher.focus();
+      }
+    };
+  
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", () => {
+        if (storedTheme !== "light" || storedTheme !== "dark") {
+          setTheme(getPreferredTheme());
+        }
+      });
+  
+    window.addEventListener("DOMContentLoaded", () => {
+      showActiveTheme(getPreferredTheme());
+  
+      for (const toggle of document.querySelectorAll("[data-bs-theme-value]")) {
+        toggle.addEventListener("click", () => {
+          const theme = toggle.getAttribute("data-bs-theme-value");
+          localStorage.setItem("theme", theme);
+          setTheme(theme);
+          showActiveTheme(theme, true);
+        });
+      }
+    });
+  })();
+</script>
+
+<!--start::OverlayScrollbars Configure-->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Normalize the current path
+    const currentPath = window.location.pathname.endsWith("/")
+        ? window.location.pathname
+        : window.location.pathname + "/";
+
+    // Select all sidebar links
+    const menuLinks = document.querySelectorAll(".nav-link");
+
+    menuLinks.forEach(link => {
+        const href = link.getAttribute("href");
+        if (!href) return; // Skip links without href
+
+        const normalizedHref = href.endsWith("/") ? href : href + "/";
+
+        // Match the current path with the link's href
+        if (currentPath === normalizedHref) {
+            // Add the 'active' class to the link
+            link.classList.add("active");
+
+            // Apply 'menu-open' to the parent menu item
+            const parentMenuItem = link.closest(".nav-item");
+            const topLevelMenu = parentMenuItem?.closest(".nav-item.menu-open") || parentMenuItem?.parentElement.closest(".nav-item");
+            if (topLevelMenu) {
+                topLevelMenu.classList.add("menu-open");
+                topLevelMenu.querySelector(".nav-link").setAttribute("aria-expanded", "true");
+            }
+        }
+    });
+});
+
+</script>
+
+<!--end::OverlayScrollbars Configure-->
+
+
+</body>
+
+</html>

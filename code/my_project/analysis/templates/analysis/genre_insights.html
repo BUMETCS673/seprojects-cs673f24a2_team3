@@ -1,0 +1,42 @@
+{% extends 'analysis/base.html' %}
+{% load static %}
+
+{% block title %}
+    Movie Runtimes | MDVP
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="row">
+    <!-- Histogram -->
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header border-0">
+                <div class="d-flex">
+                    <h3 class="card-title custom-title">Movie Genre Distribution</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="genre-distribution-chart" style="height: 600px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Parse data passed from Django
+    const combinedData = JSON.parse('{{ combinedData|safe|escapejs }}');
+    console.log(combinedData)
+    // Initialize chart
+    initChartWithTheme('genre-distribution-chart', combinedData, 'pie and line');
+});
+</script>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'analysis/base.html' %}
+{% load static %}
+
+{% block title %}
+    Movie Runtimes | MDVP
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="row">
+    <!-- Histogram -->
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header border-0">
+                <div class="d-flex">
+                    <h3 class="card-title custom-title">Movie Runtime Distribution</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="runtime-histogram" style="height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Parse histogram data from Django context
+    const runtimeData = JSON.parse('{{ runtime_data|safe|escapejs }}');
+
+    // Log the parsed data for debugging
+    console.log('Runtime Data:', runtimeData);
+
+    // Initialize the histogram bar chart
+    initChartWithTheme('runtime-histogram', runtimeData, 'bar drilldown');
+    
+});
+</script>
+
+{% endblock %}

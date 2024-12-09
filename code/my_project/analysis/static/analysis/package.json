@@ -1,0 +1,14 @@
+{
+    "name": "myproject-frontend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "devDependencies": {
+        "cypress": "^13.15.2",
+        "echarts": "^5.5.1",
+        "jest": "^27.0.0"
+    }
+}
