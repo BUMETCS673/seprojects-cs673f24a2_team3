@@ -1,4 +1,19 @@
-This folder contains all required documents, including SPPP, SDD, STD, meetingminutes and progressreport
+
+This folder contains all required documents, including SPPP, SDD, STD, meeting minutes, progress reports, user stories, and presentation slides.
+
+## Current Files in This Folder:
+- **Proj3_MeetingMinutes (updated).docx**
+- **Proj3_progressreport (updated).xlsx**
+- **Proj3_SDD (updated).docx**
+- **Proj3_SPPP (updated).docx**
+- **Proj3_STD (updated).docx**
+- **Proj3_userstories (generated)_iter3.docx**
+- **ProjX_Presentation_final.pptx**
+- **Readme.md**
+
+All files listed under **Iteration 2**, **Iteration 1**, and **Iteration 0** below have been moved to the `old-docs/` folder for archival purposes.
+
+---
 ## Iteration 2 Contains:
 Proj3_SPPP (updated)  
 Proj3_meetingminutes (updated)  
