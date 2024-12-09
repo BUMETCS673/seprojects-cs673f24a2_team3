@@ -46,7 +46,7 @@
 1. **Set Up Codespaces**  
    - Open the **Code** panel in your GitHub repository.  
    - Select the **Codespaces** tab and click the **Add (+)** button to create a new Codespace.
-![codespace](./doc/Images/codespace1.jpg)
+![codespace](../doc/Images/codespace1.jpg)
 
 2. **Run the Project**  
    - When the Codespace is active and on the main branch, run the following commands:
@@ -54,7 +54,7 @@
      cd code
      docker-compose up --build
      ```
-![codespace](./doc/Images/codespace2.jpg)
+![codespace](../doc/Images/codespace2.jpg)
 
 3. **Access the Application**  
    - The terminal will display a link when the application starts running. Click the link to load the application's home page.
