@@ -1,0 +1,326 @@
+{% extends 'analysis/base.html' %}
+{% load static %}
+
+{% block title %}
+    DASHBOARD | MDVP
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<!-- First Row -->
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card mb-4">
+            <div class="card-header border-0">
+                <div class="d-flex ">
+                    <h3 class="card-title custom-title">Distributions of Movie Releases by Year Intervals</h3>
+                    <!-- <a href="javascript:void(0);" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">View Report</a> -->
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="movie-by-intervals-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
+            </div>
+        </div> <!-- /.card -->
+    </div> <!-- /.col-lg-7 -->
+
+    <div class="col-lg-5">
+        <div class="card mb-4">
+            <div class="card-header border-0">
+              <div class="d-flex ">
+                <h3 class="card-title custom-title">Top Movie Production Companies</h3>
+              </div>
+            </div>
+            <!-- Dropdown overlay inside the chart area -->
+            <div class="filter-overlay position-absolute d-flex" style="top: 50px; right: 10px; z-index: 10;">
+              <label for="ranking-filter" class="me-2"></label>
+              <select id="ranking-filter" class="form-select form-select-sm" style="width: auto;">
+                  <option value="5">Top 5</option>
+                  <option value="10"selected>Top 10</option>
+                  <option value="15">Top 15</option>
+                  <option value="20">Top 20</option>
+              </select>
+            </div>
+            <div class="card-body">
+              <div id="top-production-companies-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
+            </div>
+        </div> <!-- /.card -->
+    </div> <!-- /.col-lg-5 -->
+</div> <!-- /.first row -->
+
+<!-- Second Row for Award VS Rating bubble chart -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header border-0">
+              <div class="d-flex ">
+                <h3 class="card-title custom-title">Ratings VS Awards</h3>
+              </div> 
+                <div class="card-tools">
+                    <a href="#" class="btn btn-tool btn-sm">
+                        <i class="bi bi-download"></i>
+                    </a>
+                    <a href="#" class="btn btn-tool btn-sm">
+                        <i class="bi bi-list"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <!-- Contents for Award VS Rating bubble chart here -->
+              <div id="award-bubble-chart" style="min-height: 250px; height: 400px; width: 100%;"></div>
+            </div>
+        </div> <!-- /.card -->
+
+    </div> <!-- /.col-lg-12 -->
+</div> <!-- /.second row -->
+<!-- Third Row for Rating distribution chart -->
+<div class="row">
+  <div class="col-lg-5"><!-- /.col-lg-5 -->
+    <div class="card mb-4">
+        <div class="card-header border-0">
+          <div class="d-flex">
+            <h3 class="card-title custom-title">Movie Production by Country</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="movies-produced-funnel" style="min-height: 250px; height: 600px; width: 100%;"></div>
+        </div>
+    </div> <!-- /.card -->
+</div> <!-- /.col-lg-5 -->
+  <div class="col-lg-7">
+      <div class="card mb-4">
+          <div class="card-header border-0">
+            <div class="d-flex">
+              <h3 class="card-title custom-title">Ratings Distribution</h3>
+            </div>
+              <div class="card-tools">
+                  <a href="#" class="btn btn-tool btn-sm">
+                      <i class="bi bi-download"></i>
+                  </a>
+                  <a href="#" class="btn btn-tool btn-sm">
+                      <i class="bi bi-list"></i>
+                  </a>
+              </div>
+          </div>
+          <div class="card-body table-responsive p-0">
+              <!-- Contents for rating distribution chart here -->
+            <div id="rating-distribution-chart" style="min-height: 250px; height: 600px; width: 100%;"></div>
+          </div>
+      </div> <!-- /.card -->
+  </div> <!-- /.col-lg-7 -->
+  
+  <!-- Movies List Table (AJAX-enabled) -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header">
+          <div class="d-flex">
+          <h3 class="card-title custom-title">List of Movies</h3>
+          </div>
+          <div class="card-tools">
+            <ul class="pagination pagination-sm float-end">
+              <div class="pagination-container">
+                {% include "analysis/partials/pagination.html" %}
+              </div>
+            </ul>
+          </div>                                  
+        </div> <!-- /.card-header -->
+
+        <!-- Table structure with the container for AJAX -->
+        <div class="card-body p-0">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Image Preview</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Ontime</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="movie-table-container">
+              {% include 'analysis/partials/movie_table.html' %}
+            </tbody>
+          </table>
+        </div> <!-- /.card-body -->
+      </div> <!-- /.card -->
+    </div> <!-- /.col-12 -->
+  </div> <!-- /.row -->             
+<!-- Insert the Echart script here-->
+
+<!-- ECharts Library from CDN -->
+<script src="https://fastly.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script type="text/javascript">
+  // Define `topProductionCompaniesChart` as a global variable
+  let topProductionCompaniesChart;
+
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM fully loaded and parsed.");
+
+    // Initialize the global chart instance
+    topProductionCompaniesChart = echarts.init(document.getElementById('top-production-companies-chart'));
+    console.log("topProductionCompaniesChart initialized:", topProductionCompaniesChart);
+
+    // Parse chart data from Django context
+    const movieIntervalsData = JSON.parse('{{ movie_distribution_by_year_intervals|safe|escapejs }}');
+    const topCompaniesData = JSON.parse('{{ top_companies|safe|escapejs }}');
+    const awardBubbleData = JSON.parse('{{ award_bubble_data|safe|escapejs }}');
+    const ratingDistributionData = JSON.parse('{{ rating_distribution|safe|escapejs }}'); 
+    const funnelData = JSON.parse('{{ funnel_data|safe|escapejs }}'); 
+
+    // Initialize charts
+    initChartWithTheme('movie-by-intervals-chart', movieIntervalsData, 'pie');
+    initChartWithTheme('top-production-companies-chart', topCompaniesData, 'bar');
+    initChartWithTheme('award-bubble-chart', awardBubbleData, 'bubble');
+    initChartWithTheme('rating-distribution-chart', ratingDistributionData, 'nested_pie'); 
+    //initChartWithTheme('movies-produced-funnel', funnelData, 'funnel');
+    initMovieProductionChart('movies-produced-funnel', funnelData);  // Initialize the Movie Production chart
+
+    
+    function updateTopProductionCompaniesChart(data) {
+    console.log("Data received for updateTopProductionCompaniesChart:", data);
+    
+    //topProductionCompaniesChart.clear();
+    console.log("Chart cleared successfully.");
+
+    // Define options with the new max
+    const options = {
+        title: {
+            text: `Top ${data.length}`,
+            left: 'center',
+            top: '5%',
+            textStyle: { color: '#fff' }
+        },
+        yAxis: {
+            type: 'category',
+            data: data.map(company => company.name),
+            inverse: true,
+        },
+        xAxis: {
+            type: 'value',
+        },
+        visualMap: {
+            min: Math.min(...data.map(item => item.value)),
+            max: Math.max(...data.map(item => item.value)), // Set min and max dynamically
+            orient: 'horizontal',
+            left: 'center',
+            text: ['High Score', 'Low Score'],
+            dimension: 0,
+            inRange: { color: ['#65B581', '#FFCE34', '#FD665F'] }, // Adjusted color range
+          },
+        series: [{
+            type: 'bar',
+            data: data.map(company => company.value),
+        }]
+    };
+    // Set options with the new max and series data
+    topProductionCompaniesChart.setOption(options);
+    //console.log("Chart updated with new options:", options);
+}
+
+
+    // Event listener to update the chart when the dropdown changes
+    const filterElement = document.getElementById("ranking-filter");
+    if (filterElement) {
+      console.log("Ranking filter found. Adding change event listener.");
+      filterElement.addEventListener("change", function() {
+        const topN = parseInt(this.value);
+        console.log(`Updating chart to show top ${topN} production companies`);
+
+        // AJAX request to fetch new data
+        fetch(`/analysis/dashboard/get-top-production-companies/?topN=${topN}`, {
+          headers: { "X-Requested-With": "XMLHttpRequest" }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Data fetched successfully:", data);
+          updateTopProductionCompaniesChart(data.data);
+        })
+        .catch(error => console.error("Error fetching data:", error));
+      });
+    } else {
+      console.error("Ranking filter element not found.");
+    }
+  });
+</script>
+<!-- Link to charts-setup.js, movieProductionChart.js -->
+<script src="{% static 'analysis/js/charts-setup.js' %}"></script>
+<script type="module" src="{% static 'analysis/js/movieProductionChart.js' %}"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Attach click events to pagination links initially
+    attachPaginationClickEvents();
+
+    // Attach click event to the Next button
+    document.querySelector(".ajax-pagination-next").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Find the currently active page button
+        const activePageButton = document.querySelector(".pagination .page-item.active");
+
+        if (activePageButton) {
+            // Get the current page from the active page button
+            const currentPage = parseInt(activePageButton.getAttribute("data-page"));
+            const nextPage = currentPage + 1;
+
+            // Construct the URL for the next page
+            const url = `?page=${nextPage}`;
+
+            // Load the next page using AJAX
+            loadPage(url);
+        }
+    });
+});
+  
+  // Function to load a page via AJAX
+  function loadPage(url) {
+      fetch(url, {
+          headers: {
+              "X-Requested-With": "XMLHttpRequest"
+          }
+      })
+      .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+      })
+      .then(data => {
+          // Update the table content
+          document.getElementById("movie-table-container").innerHTML = data.html;
+  
+          // Update pagination container content with new pagination state (HTML passed from server-side)
+          document.querySelector(".pagination-container").innerHTML = data.pagination_html;
+  
+          // Re-attach pagination click events as the DOM has changed
+          attachPaginationClickEvents();
+      })
+      .catch(error => console.error("AJAX pagination fetch error:", error));
+  }
+  
+  // Function to attach click events to pagination links
+  function attachPaginationClickEvents() {
+      document.querySelectorAll(".ajax-pagination").forEach(function(link) {
+          link.addEventListener("click", function(event) {
+              event.preventDefault();
+              const url = link.getAttribute("href");
+              loadPage(url);
+          });
+      });
+  }
+  
+  // Function to update pagination links after each AJAX load
+  function updatePaginationLinks() {
+      const activePageButton = document.querySelector(".pagination .page-item.active");
+      if (activePageButton) {
+          const currentPage = parseInt(activePageButton.getAttribute("data-page"));
+          const nextPage = currentPage + 1;
+  
+          // Update the Next button to go to the incremented page number
+          document.querySelector(".ajax-pagination-next").setAttribute("href", `?page=${nextPage}`);
+          
+          console.log(`Pagination links updated. Current page: ${currentPage}, Next page URL: ?page=${nextPage}`);
+      } else {
+          console.error("Error updating pagination links: Active page button not found.");
+      }
+  }
+  </script>
+{% endblock %}

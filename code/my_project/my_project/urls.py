@@ -19,10 +19,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from analysis import views  # Import the views from the analysis app
+from users import views     # Import the views from the users app
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),  # Map the root URL to the index view
     path('analysis/', include('analysis.urls')),  # Include URLs from the analysis app
+    path('users/', include('users.urls')),  # Include URLs from the users app
 ]

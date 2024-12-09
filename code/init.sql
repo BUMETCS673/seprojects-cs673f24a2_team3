@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS movie_data;
+GRANT ALL PRIVILEGES ON movie_data.* TO 'selina'@'%';
+FLUSH PRIVILEGES;

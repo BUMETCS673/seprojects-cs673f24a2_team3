@@ -1,0 +1,33 @@
+/* General Styles */
+.content-wrapper {
+  background-color: #343a40; /* Dark background */
+  color: #ffffff; /* Light text */
+  padding: 20px;
+}
+
+
+/* Chart Titles */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #eb6464; /* Highlighted title color */
+}
+
+/* Sidebar */
+.app-sidebar {
+  background-color: #2c2f33; /* Sidebar dark background */
+  color: #ffffff;
+}
+
+.sidebar-menu .nav-item .nav-link.active {
+  background-color: #202225; /* Active link background */
+  color: #eb6464; /* Highlight active link text */
+}
+
+/* Tooltip Style */
+.echarts-tooltip {
+  background-color: rgba(50, 50, 50, 0.85);
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 4px;
+}

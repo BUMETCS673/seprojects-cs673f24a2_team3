@@ -4469,6 +4469,15 @@ textarea.form-control-lg {
   color: var(--bs-card-title-color);
 }
 
+.custom-title {  /* Adjust this as needed , Added by XiaoJuan Li*/
+  font-size: 30px !important;
+  font-family: 'Oswald', sans-serif; 
+  text-align: center;
+  flex: 1;
+  text-align: center;
+  color: #eb6464;
+}
+
 .card-subtitle {
   margin-top: calc(-0.5 * var(--bs-card-title-spacer-y));
   margin-bottom: 0;

@@ -1,0 +1,92 @@
+{% extends 'analysis/base.html' %}
+{% load static %}
+
+{% block title %}
+    Language Diversity | MDVP
+{% endblock %}
+
+{% block content %}
+<h1>Language Diversity Page</h1>
+<!-- Main Content -->
+<div class="row">
+    <!-- Map Chart -->
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header border-0">
+                <div class="d-flex">
+                    <h3 class="card-title custom-title">Language Diversity Map</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="language-map-chart" style="height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Bar Chart -->
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header border-0">
+                <div class="d-flex">
+                    <h3 class="card-title custom-title">Language Diversity Stacked Bar Chart</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="language-stacked-bar-chart" style="height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="geoJsonPath" style="display: none;">{% static 'analysis/geo/world.json' %}</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Parse Stacked Bar Chart Data from Django Context
+    const stackedBarChartData = JSON.parse('{{ stacked_bar_chart_data|safe|escapejs }}');
+    console.log('Stacked Bar Chart Data:', stackedBarChartData);
+
+    // Initialize the stacked bar chart
+    initChartWithTheme('language-stacked-bar-chart', stackedBarChartData, 'stacked-bar');
+
+    // Parse Map Data from Django Context
+    const mapData = JSON.parse('{{ map_data|safe|escapejs }}');
+    const geoJsonPath = "{% static 'analysis/geo/world.json' %}";
+
+    // Log the parsed data for debugging
+    console.log('Map Data:', mapData);
+
+    // Fetch and register the GeoJSON map
+    fetch(geoJsonPath)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((geoJson) => {
+            console.log('Loaded GeoJSON:', geoJson); // Log GeoJSON to verify
+            echarts.registerMap('world', geoJson); // Register the world map
+            initChartWithTheme('language-map-chart', mapData, 'map'); // Initialize the map chart
+        })
+        .catch((error) => console.error('Error loading GeoJSON:', error));
+});
+</script>
+
+<!-- <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const mapContainer = document.getElementById("language-map-chart");
+
+    const applyTheme = () => {
+        const isDark = document.documentElement.getAttribute("data-bs-theme") === "dark";
+        mapContainer.className = isDark ? "dark" : "light";
+    };
+
+    // Initial application and observer for changes
+    applyTheme();
+    new MutationObserver(applyTheme).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-bs-theme"],
+    });
+});
+</script> -->
+
+{% endblock %}

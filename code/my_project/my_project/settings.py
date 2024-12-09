@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-4f=287^_csba!qg@ss3odgkm__4_wcc2s!f5h$_9x3vy*+k&vp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','app']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'analysis',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -90,6 +91,9 @@ DATABASES = {
         'PASSWORD': 'snowBall',              # The password for the database user
         'HOST': 'db',                          # The service name from docker-compose.yml (MySQL container)
         'PORT': '3306',                        # The default MySQL port   
+        'TEST': {
+            'NAME': 'test_movie_data',  # Explicitly set test database name
+        },
     }
 }
 
