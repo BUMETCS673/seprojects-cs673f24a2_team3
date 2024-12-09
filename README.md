@@ -22,3 +22,13 @@ Data Visualizations: ECharts
 Database: MySQL    
 Data Processing: Pandas    
 Version Control: Git, hosted on GitHub
+
+**Screenshots
+**  
+![Welcome Page](./doc/Images/Welcome Page.jpg)
+![Dashboard](./doc/Images/Dashboard.jpg)
+![Box Offi](./doc/Images/Box Office.jpg)
+![Genre Insights](./doc/Images/Genre Insights.jpg)
+![Movie Runtime](./doc/Images/Movie Runtime.jpg)
+![Language Diversity](./doc/Images/Language Diversity.jpg)
+![Word Cloud](./doc/Images/Word Cloud.jpg)
